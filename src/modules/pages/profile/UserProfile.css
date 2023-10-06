@@ -1,0 +1,25 @@
+.user-dp{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: -250px;
+    
+}
+
+.user-dp .dp{
+  border-radius: 50%;    
+  width: 100px;
+  border: black;
+margin-right: 400px;
+}
+
+.posts,.followers,.followings{
+  margin-left: 60px;
+}
+
+.user-info{
+    margin-top: 30px;
+margin-right: 700px;
+}
+.btn-edit{
+    margin-top: 60px;
+}
