@@ -60,10 +60,11 @@ const handleNewPassword=(data)=>{
          required
          autoComplete="off"
          />
-       {formik.touched.password && formik.errors.password && (
+      
+        </div>
+        {formik.touched.password && formik.errors.password && (
          <h6 style={{ color: "red" }}>{formik.errors.password}</h6>
        )}
-        </div>
         <div className="input-group">
        <span className="input-group-addon">
          <i className="icofont icofont-email"></i>
@@ -76,10 +77,11 @@ const handleNewPassword=(data)=>{
          required
          autoComplete="off"
          />
-       {formik.touched.confirmPassword && formik.errors.confirmPassword && (
+      
+        </div>
+        {formik.touched.confirmPassword && formik.errors.confirmPassword && (
          <h6 style={{ color: "red" }}>{formik.errors.confirmPassword}</h6>
        )}
-        </div>
         <div>
 
      <button type="button" onClick={formik.handleSubmit} className="code-btn">Set Password</button>

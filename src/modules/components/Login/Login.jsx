@@ -26,22 +26,22 @@ const Login = () => {
     },
     validationSchema: schema,
     onSubmit: (values) => {
-      console.log(values);
+ 
       handleLogin(values);
     },
   });
 
   const handleLogin = async (user) => {
-    console.log(user);
+   
     await axios
       .post("http://localhost:3300/signin", user)
       .then((res) => {
-        console.log(res);
-        navigate("/user-profile");
+        localStorage.setItem("token", JSON.stringify(res.data.token));
+        navigate("/");
       })
       .catch((err) => {
-        toast.error("Something Bad happened!");
-        console.log(err);
+        toast.error("Invalid Credentials!");
+      
       })
   };
 
@@ -63,10 +63,11 @@ const Login = () => {
               required
               autoComplete="off"
             />
-            {formik.touched.email && formik.errors.email && (
+           
+          </div>
+          {formik.touched.email && formik.errors.email && (
               <h6 style={{ color: "red" }}>{formik.errors.email}</h6>
             )}
-          </div>{" "}
           <div className="input-group">
             <span className="input-group-addon">
               <i className="icofont icofont-email"></i>
@@ -79,10 +80,11 @@ const Login = () => {
               autoComplete="off"
               name="password"
             />
-            {formik.touched.password && formik.errors.password && (
+            
+          </div>
+          {formik.touched.password && formik.errors.password && (
               <h6 style={{ color: "red" }}>{formik.errors.password}</h6>
             )}
-          </div>
           <p>Forgot password? <Link to={"/reset-password"}>Reset Password</Link></p>
           <div>
             <button

@@ -70,10 +70,11 @@ useEffect(()=> console.log(email),[])
             className="form-control"
            value={email}
           />
-          {formik.touched.email && formik.errors.email && (
+          
+           </div>
+           {formik.touched.email && formik.errors.email && (
             <h6 style={{ color: "red" }}>{formik.errors.email}</h6>
           )}
-           </div>
              <div className="input-group">
             <span className="input-group-addon">
               <i className="icofont icofont-email"></i>
@@ -86,10 +87,11 @@ useEffect(()=> console.log(email),[])
               required
               autoComplete="off"
               />
-            {formik.touched.otp && formik.errors.otp && (
+           
+             </div>
+             {formik.touched.otp && formik.errors.otp && (
               <h6 style={{ color: "red" }}>{formik.errors.otp}</h6>
             )}
-             </div>
              <div>
 
           <button type="button" className="code-btn"><Link to={"/reset-password"}>Back</Link></button>

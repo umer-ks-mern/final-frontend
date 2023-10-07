@@ -4,17 +4,17 @@ import * as Yup from "yup";
 import { Field, FormikProvider, useFormik } from "formik";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   let schema = Yup.object({
     name: Yup.string().required("Name is required"),
     username: Yup.string().required("user_name is required"),
     email: Yup.string()
       .email("Email should be valid")
       .required("Email is required"),
-    phone: Yup.string().max(15).min(11),
+    phone: Yup.string().required().max(15).min(11),
     password: Yup.string().required("*Required").min(8),
   });
 
@@ -33,12 +33,12 @@ const SignUp = () => {
   });
 
   const handleSignUp = async (data) => {
-   await axios
+    await axios
       .post("http://localhost:3300/signup", data)
       .then((res) => {
         toast.success("user created successfully!");
         console.log(res);
-    
+        navigate("/login");
       })
       .catch((err) => {
         toast.error("User not created!");
@@ -72,9 +72,12 @@ const SignUp = () => {
                         className="form-control"
                         required
                         autoComplete="off"
-                       name="name"
+                        name="name"
                       />
                     </div>
+                    {formik.touched.name && formik.errors.name && (
+                      <h6 style={{ color: "red" }}>{formik.errors.name}</h6>
+                    )}
                     <div className="input-group">
                       <span className="input-group-addon">
                         <i className="icofont icofont-email"></i>
@@ -85,9 +88,12 @@ const SignUp = () => {
                         className="form-control"
                         required
                         autoComplete="off"
-                      name="username"
+                        name="username"
                       />
                     </div>
+                    {formik.touched.username && formik.errors.username && (
+                      <h6 style={{ color: "red" }}>{formik.errors.username}</h6>
+                    )}
                     <div className="input-group">
                       <span className="input-group-addon">
                         <i className="icofont icofont-email"></i>
@@ -98,9 +104,12 @@ const SignUp = () => {
                         className="form-control"
                         required
                         autoComplete="off"
-                      name="email"
+                        name="email"
                       />
                     </div>
+                    {formik.touched.email && formik.errors.email && (
+                      <h6 style={{ color: "red" }}>{formik.errors.email}</h6>
+                    )}
                     <div className="input-group">
                       <span className="input-group-addon">
                         <i className="icofont icofont-email"></i>
@@ -111,9 +120,12 @@ const SignUp = () => {
                         className="form-control"
                         required
                         autoComplete="off"
-                       name="phone"
+                        name="phone"
                       />
                     </div>
+                    {formik.touched.phone && formik.errors.phone && (
+                      <h6 style={{ color: "red" }}>{formik.errors.phone}</h6>
+                    )}
                     <div className="input-group">
                       <span className="input-group-addon">
                         <i className="icofont icofont-password"></i>
@@ -127,6 +139,9 @@ const SignUp = () => {
                         name="password"
                       />
                     </div>
+                    {formik.touched.password && formik.errors.password && (
+                      <h6 style={{ color: "red" }}>{formik.errors.password}</h6>
+                    )}
                     <br />
                     <div className="m-t-20">
                       <button

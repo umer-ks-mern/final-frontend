@@ -66,10 +66,11 @@ const ResetPassword = () => {
               required
               autoComplete="off"
             />
-            {formik.touched.email && formik.errors.email && (
+          
+          </div>
+          {formik.touched.email && formik.errors.email && (
               <h6 style={{ color: "red" }}>{formik.errors.email}</h6>
             )}
-          </div>
           <div>
             <button
               type="button"
