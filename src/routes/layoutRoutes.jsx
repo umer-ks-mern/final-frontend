@@ -1,7 +1,9 @@
 import React from "react";
 import UserProfile from "../modules/pages/profile/UserProfile";
-import Post from "../modules/components/Post";
+
 import PrivateRoute from "./privateRoutes";
+import UpdateUser from "../modules/pages/update/Update";
+import InstagramMessageUI from "../modules/pages/messages/messages";
 
 const layoutRoutes = [
   {
@@ -13,13 +15,21 @@ const layoutRoutes = [
     ),
   },
   {
-    path: "/create-post",
+    path: "/messages",
     element: (
       <PrivateRoute>
-        <Post />
+      <InstagramMessageUI/>
       </PrivateRoute>
     ),
   },
+  {
+    path: "/update-user",
+    element: (
+      <PrivateRoute>
+      <UpdateUser/>
+      </PrivateRoute>
+    ),
+  }
 ];
 
 export default layoutRoutes;

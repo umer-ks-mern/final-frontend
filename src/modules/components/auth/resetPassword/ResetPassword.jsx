@@ -5,7 +5,7 @@ import "./resetPassword.css";
 import axios from "axios";
 import {  useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setEmail } from "../auth/store";
+import { setEmail } from "../store";
 import { toast } from "react-toastify";
 
 

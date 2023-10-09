@@ -47,11 +47,10 @@ const Sidebar = () => {
             </a>
           </li>
           <li>
-            <a href="#">
-         
-              <i className="fa fa-cogs fa-2x" />
+          <Link to={"/"}>
+            <i className="fa fa-cogs fa-2x" />
               <span className="nav-text">Profile</span>
-            </a>
+           </Link>
           </li>
           <li>
             <a href="#">
@@ -63,10 +62,10 @@ const Sidebar = () => {
         </ul>
         <ul className="logout">
           <li>
-            <a href="#">
+          <Link to={"/login"} >
               <i className="fa fa-power-off fa-2x" />
-              <span className="nav-text"><Link to={"/login"}>Logout</Link></span>
-            </a>
+              <span className="nav-text">Logout</span>
+              </Link>
           </li>
         </ul>
       </nav>

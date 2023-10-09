@@ -26,7 +26,7 @@ const Login = () => {
     },
     validationSchema: schema,
     onSubmit: (values) => {
- 
+      
       handleLogin(values);
     },
   });
@@ -37,6 +37,7 @@ const Login = () => {
       .post("http://localhost:3300/signin", user)
       .then((res) => {
         localStorage.setItem("token", JSON.stringify(res.data.token));
+        localStorage.setItem("email", JSON.stringify(user.email));
         navigate("/");
       })
       .catch((err) => {
@@ -46,6 +47,7 @@ const Login = () => {
   };
 
   return (
+
     <div>
       <img src="images/logoo.png" className="brand-logo text-center" />
 
