@@ -3,13 +3,11 @@ import "./sidebar.css";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
-  
   return (
     <>
       <div className="area" />
       <nav className="main-menu">
         <ul>
-    
           <li>
             <a href="https://jbfarrow.com">
               <i className="fa fa-home fa-2x" />
@@ -29,10 +27,10 @@ const Sidebar = () => {
             </a>
           </li>
           <li className="has-subnav">
-            <a href="#">
+            <Link to={"/create-post"}>
               <i className="fa fa-camera-retro fa-2x" />
               <span className="nav-text">Create</span>
-            </a>
+            </Link>
           </li>
           <li>
             <a href="#">
@@ -47,10 +45,10 @@ const Sidebar = () => {
             </a>
           </li>
           <li>
-          <Link to={"/"}>
-            <i className="fa fa-cogs fa-2x" />
+            <Link to={"/"}>
+              <i className="fa fa-cogs fa-2x" />
               <span className="nav-text">Profile</span>
-           </Link>
+            </Link>
           </li>
           <li>
             <a href="#">
@@ -58,14 +56,16 @@ const Sidebar = () => {
               <span className="nav-text">Search</span>
             </a>
           </li>
-          
         </ul>
         <ul className="logout">
           <li>
-          <Link to={"/login"} >
+            <Link
+              to={"/login"}
+              onClick={() => localStorage.removeItem("token")}
+            >
               <i className="fa fa-power-off fa-2x" />
               <span className="nav-text">Logout</span>
-              </Link>
+            </Link>
           </li>
         </ul>
       </nav>

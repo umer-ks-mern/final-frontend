@@ -5,11 +5,12 @@ import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
 
 
 const Login = () => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const schema = Yup.object({
     email: Yup.string()
       .required("Email is a required field")
@@ -37,7 +38,6 @@ const Login = () => {
       .post("http://localhost:3300/signin", user)
       .then((res) => {
         localStorage.setItem("token", JSON.stringify(res.data.token));
-        localStorage.setItem("email", JSON.stringify(user.email));
         navigate("/");
       })
       .catch((err) => {
