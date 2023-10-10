@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  email:JSON.parse(localStorage.getItem('email') || " "),
+  email:JSON.parse(localStorage.getItem('email')) || " ",
 }
 export const authSlice = createSlice({
   name: 'auth',

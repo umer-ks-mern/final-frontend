@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import * as Yup from 'yup';
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { baseUrl } from "../../../../App";
 
 
 const SetPassword=()=>{
@@ -31,7 +32,7 @@ const SetPassword=()=>{
       });
 
 const handleNewPassword=(data)=>{
-    axios.post("http://localhost:3300/resetpass",data).then((res)=>{
+    axios.post(`${baseUrl}/resetpass`,data).then((res)=>{
       toast.success("Password Updated!");
         console.log(res);
     }).catch((err)=>{

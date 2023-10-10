@@ -7,7 +7,7 @@ import {  useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setEmail } from "../store";
 import { toast } from "react-toastify";
-
+import { baseUrl } from "../../../../App";
 
 const ResetPassword = () => {
  const dispath = useDispatch()
@@ -35,7 +35,7 @@ const ResetPassword = () => {
   const generateOtp = async (email) => {
  
     await axios
-      .get(`http://localhost:3300/otp/${email}`)
+      .get(`${baseUrl}/otp/${email}`)
       .then((res) => {
         toast.success("OTP send to your email-address");
         console.log(res);

@@ -1,9 +1,33 @@
 
 .navbar{
-    height: 50px;
+    height: 70px;
+
 }
 .heading{
      font-size: 30px;
    font-weight: 700px;
     font-family: cursive;
+}
+.search-bar{
+   margin-right:10px;
+    width: 260px;
+    height: 50px;
+    background-color: rgb(234, 224, 224);
+   border: transparent;
+    border-radius:8px;
+    text-align: center;
+
+}
+.icon{
+    width: 45px;
+    height: 45px;
+}
+
+.glass{
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+}
+.glass:hover{
+    color: blueviolet;
 }

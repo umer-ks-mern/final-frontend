@@ -2,11 +2,11 @@ import { Field, FormikProvider, useFormik } from "formik";
 import React, { useEffect } from "react";
 import * as Yup from "yup";
 import './confirmOTP.css'
-
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { baseUrl } from "../../../../App";
 
 
 const ConfirmOTP = () => {
@@ -39,7 +39,7 @@ useEffect(()=>{
   const handleOTP = async (data) => {
    
     await axios
-      .post(`http://localhost:3300/otp`,data)
+      .post(`${baseUrl}/otp`,data)
       .then((res) => {
         toast.success("OTP verified!")
         console.log(res);
