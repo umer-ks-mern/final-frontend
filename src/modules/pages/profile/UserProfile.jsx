@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./UserProfile.css";
-
 import { MDBCol, MDBRow } from "mdb-react-ui-kit";
 import { useJwt } from "react-jwt";
 import { useSelector } from "react-redux";
