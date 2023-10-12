@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SignUp.css";
 import * as Yup from "yup";
 import { Field, FormikProvider, useFormik } from "formik";
 import axios from "axios";
 import { toast } from "react-toastify";
-import {  useNavigate } from "react-router-dom";
+import {  Link, useNavigate } from "react-router-dom";
 import { baseUrl } from "../../../../App";
 
 const SignUp = () => {
@@ -39,7 +39,8 @@ const SignUp = () => {
       .then((res) => {
         toast.success("user created successfully!");
         console.log(res);
-        navigate("/login");
+        userId = res.data.user._id;
+        handleUpload();
       })
       .catch((err) => {
         toast.error("User not created!");
@@ -47,8 +48,49 @@ const SignUp = () => {
       });
   };
 
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [message, setMessage] = useState("");
+  let userId = "";
+
+  const handleFileChange = (e) => {
+    setSelectedFile(e.target.files[0]);
+  };
+
+  const handleUpload = () => {
+    if (!selectedFile) {
+      setMessage("Please select a file.");
+      return;
+    }
+
+    const originalFileName = selectedFile.name;
+    const fileExtension = originalFileName.split(".").pop(); // Replace with your product ID or generate as needed
+    const renamedFileName = `${userId}.${fileExtension}`;
+    const renamedFile = new File([selectedFile], renamedFileName, {
+      type: selectedFile.type,
+    });
+
+    const formData = new FormData();
+    formData.append("image", renamedFile);
+
+    axios
+      .post("http://localhost:3300/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((response) => {
+        setMessage(response.data);
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.error("Error uploading image:", error);
+        setMessage("An error occurred while uploading the image.");
+      });
+  };
   return (
+   
     <div className="container">
+       <br/>
       <div className="row w-530">
         <div className="col-sm-12 d-flex loginform">
           <div className="login-card card-block auth-body">
@@ -58,8 +100,6 @@ const SignUp = () => {
               <h3 className="text-secondary text-center">
                 Signup to see photos and videos from you friends
               </h3>
-              <br />
-
               <div className="col-12">
                 <FormikProvider value={formik}>
                   <form className="w-100">
@@ -145,6 +185,16 @@ const SignUp = () => {
                     )}
                     <br />
                     <div className="m-t-20">
+                      <input
+                        name="image"
+                        type="file"
+                        accept=".jpg"
+                        onChange={handleFileChange}
+                      />
+                      <br />
+                      <p>{message}</p>
+                    </div>
+                    <div className="m-t-20">
                       <button
                         className="btn btn-primary btn-md btn-block m-b-10 signupbtn"
                         type="submit"
@@ -154,15 +204,9 @@ const SignUp = () => {
                       </button>
                     </div>
                     <br/>
-                    <div className="m-t-20">
-                      <button
-                        className="btn btn-primary btn-md btn-block m-b-10 signupbtn"
-                        type="submit"
-                        onClick={()=>navigate('/login')}
-                      >
-                        Back
-                      </button>
-                    </div>
+                    <p>
+              Already have an account? <Link to={"/login"}>Login</Link>
+            </p>
                   </form>
                 </FormikProvider>
               </div>

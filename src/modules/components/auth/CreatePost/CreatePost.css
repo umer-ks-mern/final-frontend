@@ -1,0 +1,22 @@
+.authbox{
+    margin-top: -137px;
+}
+
+
+.form-control{
+  width: 700px;
+  height: 0px;
+  border-radius: 9px;
+  margin-top: 40px;
+  border-color: rgb(70, 23, 78);
+}
+.brand-logo{
+  margin-top: 70px;
+  width: 250px;
+}
+.image-btn{
+border-radius: 4px;
+color: black;
+width: 500px;
+margin-left: 180px;
+}
