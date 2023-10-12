@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import * as Yup from 'yup';
 import { Field, FormikProvider, useFormik } from "formik";
 import axios from "axios";
-import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { baseUrl } from "../../../App";
 import {decodeToken} from "react-jwt";
@@ -11,10 +10,7 @@ import {decodeToken} from "react-jwt";
 
 const UpdateUser=()=>{
 
-  
-    // const email = useSelector((state)=> state.auth.email);
-    const [user,setUser]=useState({});
-    setUser(decodeToken(localStorage.getItem("token")).user);
+    const [user,setUser]=useState(decodeToken(localStorage.getItem("token")).user);
     const navigate = useNavigate();
     let schema = Yup.object({
       name: Yup.string(),
@@ -26,8 +22,8 @@ const UpdateUser=()=>{
 
     const formik = useFormik({
       initialValues: {
-        name: user.username,
-        email: user.email,
+        name:user.name,
+        email:user.email,
         bio: user.bio
       },
       validationSchema: schema,
@@ -41,11 +37,11 @@ const UpdateUser=()=>{
   
     const handleUpdate = async (data) => {
       await axios
-        .put(`${baseUrl}/user/${user.email}`, data)
+        .put(`${baseUrl}/user/${user._id}`, data)
         .then((res) => {
           toast.success("User Updated successfully!");
           console.log(res);
-          navigate("");
+          navigate("/");
         })
         .catch((err) => {
           toast.error("User not updated!");
@@ -56,6 +52,9 @@ const UpdateUser=()=>{
 
     return (
         <>
+         {
+          user && (
+            <>
          <div className="container">
       <div className="row w-530">
         <div className="col-sm-12 d-flex loginform">
@@ -77,9 +76,9 @@ const UpdateUser=()=>{
                       </span>
                       <Field
                         type="text"
-                        placeholder="full-name"
+                      
                         className="form-control"
-                        value={formik.name}
+                      
                         autoComplete="off"
                         name="name"
                       />
@@ -94,9 +93,9 @@ const UpdateUser=()=>{
                       </span>
                       <Field
                         type="email"
-                        placeholder="email"
+                       
                         className="form-control"
-                       value={formik.email}
+                       
                         autoComplete="off"
                         name="email"
                       />
@@ -111,9 +110,9 @@ const UpdateUser=()=>{
                       </span>
                       <Field
                         type="text"
-                        placeholder="bio"
+                       
                         className="form-control"
-                       value={formik.bio}
+                      placeholder="add your bio"
                         autoComplete="off"
                         name="bio"
                       />
@@ -150,6 +149,10 @@ const UpdateUser=()=>{
         </div>
       </div>
     </div>
+
+        </>
+          )
+         }
 
         </>
     )

@@ -77,7 +77,7 @@ const Post = () => {
             <img
               src={`http://localhost:3300/images/${post.user_id._id}.jpg`}
               alt="dp"
-              className="dp"
+              className="user-dp"
               height={100}
               width={100}
             />

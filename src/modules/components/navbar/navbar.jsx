@@ -1,53 +1,61 @@
-import React from "react";
-import './navbar.css';
-import { FormikProvider, useFormik,Field } from "formik";
-import * as Yup from 'yup';
+import React, { useState } from "react";
+import "./navbar.css";
 import axios from "axios";
 import { baseUrl } from "../../../App";
+import debounce from "lodash/debounce";
 
-const Navbar=()=>{
-    const schema = Yup.object({
-     search:Yup.string().required("nothing searched!")
+const Navbar = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
+  const debouncedSearch = debounce((query) => {
+    axios
+      .get(`${baseUrl}/users/${searchQuery}`)
+
+      .then((res) => {
+        setSearchResults(res.data);
+      })
+      .catch((error) => {
+        console.error(error);
       });
-    
-      const formik = useFormik({
-        initialValues: {
-          search:""
-        },
-        validationSchema: schema,
-        onSubmit: (values) => {
-         handleSearch(values);
-        },
-      });
-    
-      const handleSearch = async (search) => {
-       
-        await axios
-          .get(`${baseUrl}/users/${search}`)
-          .then((res) => {
-            console.log(res.data);
-           
-          })
-          .catch((err) => {
-            toast.error("Nothing Found!");
-          
-          })
-      };
-    return(
-        <>
-        <nav className="navbar fixed-top navbar-light bg-light">
-            <img src="images/insta_logo.png" className="icon"/>
-          
-        <FormikProvider value={formik}>    
-        <form>   
-        <span>     
-        <Field type="text" placeholder="search for people and posts....." name="search" className="search-bar"/>
-        <img src="images/glass.png" className="glass" onClick={formik.handleSubmit}/>
-        </span>
+  }, 300);
+
+  const handleSearchInputChange = (event) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+    debouncedSearch(query);
+  };
+  return (
+    <>
+      <nav className="navbar fixed-top navbar-light bg-light">
+        <img src="images/insta_logo.png" className="icon" />
+
+        <form>
+          <span>
+            <input
+              type="text"
+              placeholder="Search for a user"
+              value={searchQuery}
+              onChange={handleSearchInputChange}
+              className="search-bar"
+            />
+            <img
+              src="images/glass.png"
+              className="glass"
+              onClick={handleSearchInputChange}
+            />
+
+            <ul>
+              {searchResults.map((user) => (
+                <li key={user.id} className="mb-2 list">
+                  {user.username}
+                </li>
+              ))}
+            </ul>
+          </span>
         </form>
-        </FormikProvider>
-    </nav>
-        </>
-    )
+      </nav>
+    </>
+  );
 };
 export default Navbar;

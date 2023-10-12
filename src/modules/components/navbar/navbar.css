@@ -22,7 +22,9 @@
     width: 45px;
     height: 45px;
 }
-
+.list{
+list-style: none;
+}
 .glass{
     height: 30px;
     width: 30px;

@@ -4,23 +4,40 @@ import SignUp from '../modules/components/auth/SignUp/SignUp';
 import ResetPassword from '../modules/components/auth/resetPassword/ResetPassword';
 import ConfirmOTP from '../modules/components/auth/confirmOtp/confrimOTP';
 import SetPassword from '../modules/components/auth/setPassword/setPassword';
+import RestrictedRoutes from "./restrict";
 
 const nonLayoutRoutes=[
     {
         path:'/login',
-        element:<Login/>
+        element:(
+        <RestrictedRoutes>
+        <Login/>
+        </RestrictedRoutes>
+        )
     },
     {
         path:'/signup',
-        element:<SignUp/>
+        element:(
+            <RestrictedRoutes>
+            <SignUp/>
+            </RestrictedRoutes>
+            )
     }, 
     {
         path:'/reset-password',
-        element:<ResetPassword/>
+        element:(
+            <RestrictedRoutes>
+            <ResetPassword/>
+            </RestrictedRoutes>
+            )
     }, 
     {
         path:'/confirm-otp',
-        element:<ConfirmOTP/>
+        element:(
+            <RestrictedRoutes>
+            <ConfirmOTP/>
+            </RestrictedRoutes>
+            )
     }, 
     {
         path:'/setPass',

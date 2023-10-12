@@ -19,6 +19,7 @@ const CreatePost = () => {
     },
     validationSchema: schema,
     onSubmit: (values) => {
+      console.log(values);
       handlePost({
         caption: values.caption,
         user_id: decodeToken(JSON.parse(localStorage.getItem("token"))).user
@@ -27,8 +28,8 @@ const CreatePost = () => {
     },
   });
 
-  const handlePost = async (data) => {
-    await axios
+  const handlePost = (data) => {
+    axios
       .post("http://localhost:3300/post", data)
       .then((res) => {
         toast.success("Post created successfully!");
@@ -36,6 +37,7 @@ const CreatePost = () => {
         postId = res.data.post._id;
         console.log(postId);
         handleUpload();
+        navigate("/");
       })
       .catch((err) => {
         toast.error("Post not created!");
@@ -103,7 +105,7 @@ const CreatePost = () => {
                         type="text"
                         placeholder="caption"
                         className="form-control"
-                        required
+                      
                         autoComplete="off"
                         name="caption"
                       />
@@ -114,14 +116,16 @@ const CreatePost = () => {
                     <br />
                     <div className="m-t-20">
                       <input
+                      className="image-btn"
                         name="image"
                         type="file"
                         accept=".jpg"
                         onChange={handleFileChange}
                       />
-                      <br />
-                      <p>{message}</p>
+                      
+                     
                     </div>
+                    <br/>
                     <div className="m-t-20">
                       <button
                         className="btn btn-primary btn-md btn-block m-b-10 signupbtn"

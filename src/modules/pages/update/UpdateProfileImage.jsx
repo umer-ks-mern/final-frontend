@@ -41,7 +41,8 @@ const UpdateProfilePicture = () => {
       })
       .then((response) => {
         setMessage(response.data);
-        toast.success("Picture Updated");
+        toast.success("Profile Picture Updated");
+        navigate("/")
       })
       .catch((error) => {
         console.error("Error uploading image:", error);
@@ -66,7 +67,7 @@ const UpdateProfilePicture = () => {
         <div className="m-t-20">
           <button
             className="btn btn-primary btn-md btn-block m-b-10 signupbtn"
-            type="submit"
+            type="button"
             onClick={handleUpload}
           >
             Upload

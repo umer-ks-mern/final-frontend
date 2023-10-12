@@ -28,6 +28,7 @@ const UpdatePost = (postId) => {
       .post(`http://localhost:3300/post/${postId}`, data)
       .then((res) => {
         toast.success("Post updated successfully!");
+        navigate(`/post/${postId}`)
         console.log(res);
       })
       .catch((err) => {

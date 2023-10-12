@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { Field, FormikProvider, useFormik } from "formik";
 import axios from "axios";
 import { toast } from "react-toastify";
-import {  useNavigate } from "react-router-dom";
+import {  Link, useNavigate } from "react-router-dom";
 import { baseUrl } from "../../../../App";
 
 const SignUp = () => {
@@ -88,7 +88,9 @@ const SignUp = () => {
       });
   };
   return (
+   
     <div className="container">
+       <br/>
       <div className="row w-530">
         <div className="col-sm-12 d-flex loginform">
           <div className="login-card card-block auth-body">
@@ -98,8 +100,6 @@ const SignUp = () => {
               <h3 className="text-secondary text-center">
                 Signup to see photos and videos from you friends
               </h3>
-              <br />
-
               <div className="col-12">
                 <FormikProvider value={formik}>
                   <form className="w-100">
@@ -204,15 +204,9 @@ const SignUp = () => {
                       </button>
                     </div>
                     <br/>
-                    <div className="m-t-20">
-                      <button
-                        className="btn btn-primary btn-md btn-block m-b-10 signupbtn"
-                        type="submit"
-                        onClick={()=>navigate('/login')}
-                      >
-                        Back
-                      </button>
-                    </div>
+                    <p>
+              Already have an account? <Link to={"/login"}>Login</Link>
+            </p>
                   </form>
                 </FormikProvider>
               </div>

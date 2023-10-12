@@ -9,8 +9,18 @@ import CreatePost from "../modules/components/auth/CreatePost/CreatePost";
 import Post from "../modules/pages/post/Post";
 import Comments from "../modules/pages/comments/Comments";
 import Likes from "../modules/pages/likes/Likes";
+import OtherUsers from "../modules/pages/otherUsers/OtherUsers";
 
 const layoutRoutes = [
+  {
+    path: "/other-user",
+    element: (
+      <PrivateRoute>
+        <OtherUsers />
+      </PrivateRoute>
+    ),
+  },
+  
   {
     path: "/",
     element: (
