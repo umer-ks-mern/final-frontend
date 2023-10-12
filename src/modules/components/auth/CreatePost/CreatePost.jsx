@@ -75,7 +75,6 @@ const CreatePost = () => {
       })
       .then((response) => {
         setMessage(response.data);
-        navigate("/login");
       })
       .catch((error) => {
         console.error("Error uploading image:", error);

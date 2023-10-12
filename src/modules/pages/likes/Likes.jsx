@@ -1,9 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import * as Yup from "yup";
+import { Field, FormikProvider, useFormik } from "formik";
 import { toast } from "react-toastify";
+import Comment from "../../components/comment/Comment";
 
-const Comment = () => {
+const Likes = () => {
   const { postId } = useParams();
   console.log(postId);
   const [post, setPost] = useState(null);
@@ -21,22 +24,17 @@ const Comment = () => {
       });
   }, []);
 
-  const handleLike = () => {
-    axios
-      .post(`http://localhost:3300/likes/${postId}`, {
-        user_id: post.user_id._id,
-      })
+  const getUser = async (userId) => {
+    await axios
+      .get(`http://localhost:3300/user/${userId}`)
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        return (res.data.name)
       })
       .catch((err) => {
         console.log(err);
       });
-  };
-
-  const handleComment = () => {
-    console.log();
-  };
+  }
 
   return (
     <>
@@ -56,18 +54,22 @@ const Comment = () => {
             {new Date(post.updatedAt).toLocaleTimeString()}{" "}
             {new Date(post.updatedAt).toLocaleDateString()}
           </h6>
-
           <h2>{post.caption}</h2>
-          <img
-            src={`http://localhost:3300/images/${postId}.jpg`}
-            alt="post-img"
-            className="post-img"
-            height={500}
-            width={500}
-          />
+          <br />
           <div>
-            <button onClick={handleComment}>Comment</button>
-            <button onClick={handleLike}>Like</button>
+            {post.likes.map((like, index) => (
+              <div key={index}>
+                {console.log(like)}
+                <img
+                  src={`http://localhost:3300/images/${like.user_id}.jpg`}
+                  alt="dp"
+                  className="dp"
+                  height={50}
+                  width={50}
+                />
+                <h6>{like.user_id}</h6>
+              </div>
+            ))}
           </div>
         </div>
       )}
@@ -75,4 +77,4 @@ const Comment = () => {
   );
 };
 
-export default Comment;
+export default Likes;
