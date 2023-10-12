@@ -6,9 +6,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import layoutRoutes from './routes/layoutRoutes';
 import nonLayoutRoutes from './routes/nonLayoutRoutes';
 
+export const baseUrl = "http://localhost:3300";
 
 function App() {
-
   return (
     <>
     <ToastContainer/>

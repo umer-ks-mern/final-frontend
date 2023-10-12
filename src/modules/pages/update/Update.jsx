@@ -1,29 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from 'yup';
 import { Field, FormikProvider, useFormik } from "formik";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { baseUrl } from "../../../App";
+import {decodeToken} from "react-jwt";
 
 
 const UpdateUser=()=>{
-    const email = useSelector((state)=> state.auth.email);
+
+  
+    // const email = useSelector((state)=> state.auth.email);
+    const [user,setUser]=useState({});
+    setUser(decodeToken(localStorage.getItem("token")).user);
     const navigate = useNavigate();
     let schema = Yup.object({
-      name: Yup.string().required("Name is required"),
+      name: Yup.string(),
       email: Yup.string()
-        .email("Email should be valid")
-        .required("Email is required"),
+        .email("Email should be valid"),
       bio: Yup.string()
       
     });
-  
+
     const formik = useFormik({
       initialValues: {
-        name: "",
-        email: "",
-        bio: ""
+        name: user.username,
+        email: user.email,
+        bio: user.bio
       },
       validationSchema: schema,
       onSubmit: (values) => {
@@ -31,10 +36,12 @@ const UpdateUser=()=>{
         console.log(values);
       },
     });
+
+   
   
     const handleUpdate = async (data) => {
       await axios
-        .put(`http://localhost:3300/user/${email}`, data)
+        .put(`${baseUrl}/user/${user.email}`, data)
         .then((res) => {
           toast.success("User Updated successfully!");
           console.log(res);
@@ -54,7 +61,7 @@ const UpdateUser=()=>{
         <div className="col-sm-12 d-flex loginform">
           <div className="login-card card-block auth-body">
             <div className="authbox">
-              <img src="images/logoo.png" className="brand-logo text-center" />
+            
               <br />
               <h3 className="text-secondary text-center">
                 Update your Profile
@@ -72,7 +79,7 @@ const UpdateUser=()=>{
                         type="text"
                         placeholder="full-name"
                         className="form-control"
-                        required
+                        value={formik.name}
                         autoComplete="off"
                         name="name"
                       />
@@ -89,7 +96,7 @@ const UpdateUser=()=>{
                         type="email"
                         placeholder="email"
                         className="form-control"
-                        required
+                       value={formik.email}
                         autoComplete="off"
                         name="email"
                       />
@@ -106,7 +113,7 @@ const UpdateUser=()=>{
                         type="text"
                         placeholder="bio"
                         className="form-control"
-                        
+                       value={formik.bio}
                         autoComplete="off"
                         name="bio"
                       />
@@ -124,8 +131,19 @@ const UpdateUser=()=>{
                         Update
                       </button>
                     </div>
+                    <br/>
+                   
                   </form>
                 </FormikProvider>
+                <div className="m-t-20">
+                      <button
+                        className="btn btn-primary btn-md btn-block m-b-10 signupbtn"
+                        type="submit"
+                        onClick={()=>navigate("/")}
+                      >
+                        Back
+                      </button>
+                    </div>
               </div>
             </div>
           </div>

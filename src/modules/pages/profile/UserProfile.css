@@ -1,19 +1,20 @@
 .user-dp{
     display: flex;
     justify-content: space-evenly;
-    margin-top: -250px;
-    
+    margin-top: 55px;
+    margin-left: 90px;
 }
 
 .user-dp .dp{
   border-radius: 50%;    
   width: 100px;
   border: black;
-margin-right: 400px;
+margin-right: 300px;
 }
 
 .posts,.followers,.followings{
-  margin-left: 60px;
+
+  margin-left: 50px;
 }
 
 .user-info{
@@ -22,4 +23,11 @@ margin-right: 700px;
 }
 .btn-edit{
     margin-top: 60px;
+   margin-right: 40px;
+}
+.user-name{
+  font-weight: bold;
+}
+.gallery{
+  margin-top: 10%;
 }

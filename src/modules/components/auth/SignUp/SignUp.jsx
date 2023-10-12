@@ -4,7 +4,8 @@ import * as Yup from "yup";
 import { Field, FormikProvider, useFormik } from "formik";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
+import { baseUrl } from "../../../../App";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ const SignUp = () => {
 
   const handleSignUp = async (data) => {
     await axios
-      .post("http://localhost:3300/signup", data)
+      .post(`${baseUrl}/signup`, data)
       .then((res) => {
         toast.success("user created successfully!");
         console.log(res);
@@ -200,6 +201,16 @@ const SignUp = () => {
                         onClick={formik.handleSubmit}
                       >
                         Sign Up
+                      </button>
+                    </div>
+                    <br/>
+                    <div className="m-t-20">
+                      <button
+                        className="btn btn-primary btn-md btn-block m-b-10 signupbtn"
+                        type="submit"
+                        onClick={()=>navigate('/login')}
+                      >
+                        Back
                       </button>
                     </div>
                   </form>

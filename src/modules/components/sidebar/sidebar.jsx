@@ -1,6 +1,6 @@
 import React from "react";
 import "./sidebar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   return (
@@ -50,19 +50,14 @@ const Sidebar = () => {
               <span className="nav-text">Profile</span>
             </Link>
           </li>
-          <li>
-            <a href="#">
-              <i className="fa fa-map-marker fa-2x" />
-              <span className="nav-text">Search</span>
-            </a>
-          </li>
+        
         </ul>
         <ul className="logout">
           <li>
-            <Link
-              to={"/login"}
-              onClick={() => localStorage.removeItem("token")}
-            >
+          <Link to={"/login"} onClick={()=>{
+            localStorage.removeItem("token");
+           
+          }}>
               <i className="fa fa-power-off fa-2x" />
               <span className="nav-text">Logout</span>
             </Link>
