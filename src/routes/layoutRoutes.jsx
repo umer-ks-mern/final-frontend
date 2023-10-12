@@ -7,7 +7,8 @@ import InstagramMessageUI from "../modules/pages/messages/messages";
 import UpdateProfilePicture from "../modules/pages/update/UpdateProfileImage";
 import CreatePost from "../modules/components/auth/CreatePost/CreatePost";
 import Post from "../modules/pages/post/Post";
-import UserSearch from "../modules/components/search/search";
+import Comments from "../modules/pages/comments/Comments";
+import Likes from "../modules/pages/likes/Likes";
 import OtherUsers from "../modules/pages/otherUsers/OtherUsers";
 
 const layoutRoutes = [
@@ -19,14 +20,7 @@ const layoutRoutes = [
       </PrivateRoute>
     ),
   },
-  {
-    path: "/search-user",
-    element: (
-      <PrivateRoute>
-        <UserSearch />
-      </PrivateRoute>
-    ),
-  },
+  
   {
     path: "/",
     element: (
@@ -72,6 +66,22 @@ const layoutRoutes = [
     element: (
       <PrivateRoute>
         <Post />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/post/comments/:postId",
+    element: (
+      <PrivateRoute>
+        <Comments />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/post/likes/:postId",
+    element: (
+      <PrivateRoute>
+        <Likes />
       </PrivateRoute>
     ),
   },
