@@ -8,10 +8,9 @@ import { toast } from "react-toastify";
 
 import { baseUrl } from "../../../../App";
 
-
 const Login = () => {
   const navigate = useNavigate();
-  
+
   const schema = Yup.object({
     email: Yup.string()
       .required("Email is a required field")
@@ -28,13 +27,11 @@ const Login = () => {
     },
     validationSchema: schema,
     onSubmit: (values) => {
-      
       handleLogin(values);
     },
   });
 
   const handleLogin = async (user) => {
-   
     await axios
       .post(`${baseUrl}/signin`, user)
       .then((res) => {
@@ -44,12 +41,10 @@ const Login = () => {
       })
       .catch((err) => {
         toast.error("Invalid Credentials!");
-      
-      })
+      });
   };
 
   return (
-
     <div>
       <img src="images/logoo.png" className="brand-logo text-center" />
 
@@ -67,11 +62,10 @@ const Login = () => {
               required
               autoComplete="off"
             />
-           
           </div>
           {formik.touched.email && formik.errors.email && (
-              <h6 style={{ color: "red" }}>{formik.errors.email}</h6>
-            )}
+            <h6 style={{ color: "red" }}>{formik.errors.email}</h6>
+          )}
           <div className="input-group">
             <span className="input-group-addon">
               <i className="icofont icofont-email"></i>
@@ -84,12 +78,13 @@ const Login = () => {
               autoComplete="off"
               name="password"
             />
-            
           </div>
           {formik.touched.password && formik.errors.password && (
-              <h6 style={{ color: "red" }}>{formik.errors.password}</h6>
-            )}
-          <p>Forgot password? <Link to={"/reset-password"}>Reset Password</Link></p>
+            <h6 style={{ color: "red" }}>{formik.errors.password}</h6>
+          )}
+          <p>
+            Forgot password? <Link to={"/reset-password"}>Reset Password</Link>
+          </p>
           <div>
             <button
               type="button"
