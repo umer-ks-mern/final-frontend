@@ -10,6 +10,7 @@ import Post from "../modules/pages/post/Post";
 import Comments from "../modules/pages/comments/Comments";
 import Likes from "../modules/pages/likes/Likes";
 import OtherUsers from "../modules/pages/otherUsers/OtherUsers";
+import Gallery from "../modules/pages/explore/explore";
 
 const layoutRoutes = [
   {
@@ -17,6 +18,15 @@ const layoutRoutes = [
     element: (
       <PrivateRoute>
         <OtherUsers />
+      </PrivateRoute>
+    ),
+  },
+  
+  {
+    path: "/explore",
+    element: (
+      <PrivateRoute>
+        <Gallery />
       </PrivateRoute>
     ),
   },

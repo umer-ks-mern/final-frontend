@@ -10,17 +10,17 @@ const Sidebar = () => {
       <nav className="main-menu">
         <ul>
           <li>
-            <a href="https://jbfarrow.com">
+            <a href="#">
               <i className="fa fa-home fa-2x" />
               <span className="nav-text">Home</span>
             </a>
           </li>
           <hr/>
           <li className="has-subnav">
-            <a href="#">
+            <Link to={"/explore"}>
               <i className="fa fa-globe fa-2x" />
               <span className="nav-text">Explore</span>
-            </a>
+              </Link>
           </li>
           <hr/>
           <li className="has-subnav">
@@ -37,13 +37,8 @@ const Sidebar = () => {
             </Link>
           </li>
           <hr/>
-          <li>
-            <a href="#">
-              <i className="fa fa-film fa-2x" />
-              <span className="nav-text">Reels</span>
-            </a>
-          </li>
-          <hr/>
+         
+        
           <li>
             <a href="#">
               <i className="fa fa-book fa-2x" />

@@ -1,4 +1,18 @@
 .user-dp{
-    width: 30px;
-    height: 30px;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    margin-right: 581px;
+}
+
+.user-name{
+    font-size: 18px;
+    margin-top: -59px;
+    margin-right: 218px;
+}
+.post-date{
+    margin-top: -12px;
+    margin-right: 191px;
+    font-size: 13px;
+    font-style: italic;
 }

@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import * as Yup from "yup";
 import { Field, FormikProvider, useFormik } from "formik";
 import { toast } from "react-toastify";
+import './Post.css';
 
 const Post = () => {
   const { postId } = useParams();
@@ -73,7 +74,7 @@ const Post = () => {
     <>
       {post && (
         <div>
-          <div>
+          <span>
             <img
               src={`http://localhost:3300/images/${post.user_id._id}.jpg`}
               alt="dp"
@@ -81,12 +82,14 @@ const Post = () => {
               height={100}
               width={100}
             />
-          </div>
-          <h2>{post.user_id.name}</h2>
-          <h6>
+          </span>
+          <span>
+          <p className="user-name">{post.user_id.name}</p>
+          </span>
+          <p className="post-date">
             {new Date(post.updatedAt).toLocaleTimeString()}{" "}
             {new Date(post.updatedAt).toLocaleDateString()}
-          </h6>
+          </p>
 
           <h2>{post.comment}</h2>
           <img
