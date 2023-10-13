@@ -1,18 +1,58 @@
-.user-dp{
+.post-dp{
     border-radius: 50%;
     width: 70px;
     height: 70px;
-    margin-right: 581px;
+    margin-right: 429px;
+    margin-top: 40px;
 }
 
 .user-name{
     font-size: 18px;
     margin-top: -59px;
-    margin-right: 218px;
+    margin-right: 255px;
 }
 .post-date{
     margin-top: -12px;
     margin-right: 191px;
     font-size: 13px;
     font-style: italic;
+}
+.post-img{
+border-radius: 3px;
+border:  rgb(48, 45, 45) solid 3px;
+}
+.heart{
+    margin-top: 10px;
+    margin-right: 450px;
+
+}
+
+.comment-icon{
+    width: 35px;
+    height: 38px;
+    margin-top: -111px;
+    margin-left: -344px;
+    cursor: pointer;
+}
+.comment-count{
+    margin-left: -352px;
+    margin-top: -52px;
+    font-weight: 600;
+    
+}
+.comment-field{
+    width:371px;
+    height: 53px;
+    border-radius: 40px;
+    border-color: rgb(100, 87, 100);
+    margin-left: 220px;
+    margin-top: -10px;
+    font-style: italic;
+
+}
+.comment-btn{
+    border-radius: 17px;
+    background-color: rgb(132, 72, 126);
+    border-color: transparent;
+    margin-left: 4px;
 }

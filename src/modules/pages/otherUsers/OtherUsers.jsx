@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { baseUrl } from "../../../App";
 import axios from "axios";
 import { decodeToken } from "react-jwt";
 import { MDBRow } from "mdb-react-ui-kit";
 
 const OtherUsers=()=>{
+  const {id}=useParams()
     const navigate = useNavigate();
     const userr= useState(decodeToken(JSON.parse(localStorage.getItem("token"))).user);
     console.log(userr)
@@ -14,7 +15,7 @@ const OtherUsers=()=>{
   useEffect(()=>{
     
     axios
-    .get(`${baseUrl}/user/${userr[0]._id}`)
+    .get(`${baseUrl}/user/${id}`)
     .then((res) => {
       console.log(res.data);
      setUser(res.data);
@@ -23,7 +24,7 @@ const OtherUsers=()=>{
       console.log(err);
     });
   
-    axios.get(`${baseUrl}/user-posts/${userr[0]._id}`)
+    axios.get(`${baseUrl}/user-posts/${id}`)
   .then((res) => {
     // console.log(res.data);
    setPosts(res.data);
@@ -41,8 +42,7 @@ const OtherUsers=()=>{
     };
 
   const handleFollow=()=>{
-    axios.put(`${baseUrl}/user/followers/
-    /${userr[0]._id}`).then((res)=>{
+    axios.put(`${baseUrl}/user/followers/${id}/${userr[0]._id}`).then((res)=>{
       console.log(res);
       userr.followers=res.data.followers.length;
     }).catch((err)=>{
@@ -64,7 +64,9 @@ const OtherUsers=()=>{
             onClick={handleImageUpdate}
           />
           <span className="posts">0</span>
+          <img src="/images/vertical-lines.png" className="bars" />
           <span className="followers">{user.followers.length}</span>
+          <img src="/images/vertical-lines.png" className="bars" />
           <span className="followings">{user.following.length}</span>
         </div>
         <div className="user-info">
@@ -84,7 +86,9 @@ const OtherUsers=()=>{
         <div className="post-gallery">
       {posts.map((image, index) => (
         <div key={index} className="post-image">
-          <img src={`http://localhost:3300/images/${image._id}.jpg`} alt={`Post ${index + 1}`} />
+          <img src={`http://localhost:3300/images/${image._id}.jpg`} alt={`Post ${index + 1}`}  onClick={()=>{
+                    navigate(`/post/${image._id}`)
+                  }}  style={{cursor:"pointer"}}/>
         </div>
       ))}
     </div>

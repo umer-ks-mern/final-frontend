@@ -5,6 +5,8 @@ import * as Yup from "yup";
 import { Field, FormikProvider, useFormik } from "formik";
 import { toast } from "react-toastify";
 import './Post.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 const Post = () => {
   const { postId } = useParams();
@@ -14,7 +16,7 @@ const Post = () => {
   const navigate = useNavigate();
 
   let schema = Yup.object({
-    comment: Yup.string().required("comment is required"),
+    comment: Yup.string()
   });
 
   const formik = useFormik({
@@ -27,6 +29,7 @@ const Post = () => {
         user_id: post.user_id._id,
         comment_text: values.comment,
       });
+      formik.resetForm();
     },
   });
 
@@ -51,6 +54,7 @@ const Post = () => {
       .then((res) => {
         console.log(res);
         setLikes(likes + 1);
+        toggleRed();
       })
       .catch((err) => {
         console.log(err);
@@ -64,11 +68,20 @@ const Post = () => {
       .then((res) => {
         console.log(res);
         setLikes(likes + 1);
+
       })
       .catch((err) => {
         console.log(err);
       });
   };
+  const [isRed, setIsRed] = useState(false);
+
+  const toggleRed = () => {
+    setIsRed(!isRed);
+  };
+
+  const iconColor = isRed ? 'red' : 'black';
+
 
   return (
     <>
@@ -78,7 +91,7 @@ const Post = () => {
             <img
               src={`http://localhost:3300/images/${post.user_id._id}.jpg`}
               alt="dp"
-              className="user-dp"
+              className="post-dp"
               height={100}
               width={100}
             />
@@ -102,18 +115,27 @@ const Post = () => {
             style={{ cursor: "pointer" }}
           />
           <div>
-            <h6
+           
+               <div className="heart">
+      <FontAwesomeIcon
+        icon={faHeart}
+        onClick={toggleRed}
+        style={{ color: iconColor, cursor: 'pointer', width:"500px", height:"25px" }}
+        
+      />
+     <h6
               onClick={() => navigate(`/post/likes/${postId}`)}
               style={{ cursor: "pointer" }}
             >
-              Likes {post.likes.length}
+     {post.likes.length}
             </h6>
-            <h6
-              onClick={() => navigate(`/post/comments/${postId}`)}
+            </div>
+           <span><img src="/images/chat.png" alt="/" className="comment-icon"  onClick={() => navigate(`/post/comments/${postId}`)} /><p className="comment-count"> {post.comments.length}</p><h6
+             
               style={{ cursor: "pointer" }}
             >
-              Comments {post.comments.length}
-            </h6>
+            
+            </h6></span>
           </div>
           <div className="col-12">
             <FormikProvider value={formik}>
@@ -124,25 +146,26 @@ const Post = () => {
                   </span>
                   <Field
                     type="text"
-                    placeholder="comment"
-                    className="form-control"
+                    placeholder="share your thoughts"
+                    className="comment-field"
                     autoComplete="off"
                     name="comment"
                   />
-                </div>
-                {formik.touched.comment && formik.errors.comment && (
-                  <h6 style={{ color: "red" }}>{formik.errors.comment}</h6>
-                )}
-                <br />
-                <div className="m-t-20">
+                  <div className="m-t-20">
                   <button
-                    className="btn btn-primary btn-md btn-block m-b-10"
+                    className="btn btn-primary btn-md btn-block m-b-10 comment-btn"
                     type="submit"
                     onClick={formik.handleSubmit}
                   >
                     Comment
                   </button>
                 </div>
+                </div>
+                {formik.touched.comment && formik.errors.comment && (
+                  <h6 style={{ color: "red" }}>{formik.errors.comment}</h6>
+                )}
+                <br />
+                
               </form>
             </FormikProvider>
           </div>

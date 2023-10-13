@@ -14,7 +14,7 @@ import Gallery from "../modules/pages/explore/explore";
 
 const layoutRoutes = [
   {
-    path: "/other-user",
+    path: "/other-user/:id",
     element: (
       <PrivateRoute>
         <OtherUsers />

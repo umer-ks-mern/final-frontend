@@ -5,15 +5,18 @@ import axios from 'axios';
 
 const Gallery=()=> {
 
-const[post,setPost]=useState();
+  const [post, setPost] = useState(null);
 useEffect(()=>{
-axios.get(`${baseUrl}/posts`).then((res)=>{
-    console.log(res.data.posts);
-    setPost(res.data.posts);
-   console.log(post);
-}).catch((err)=>{
+  axios
+  .get(`${baseUrl}/posts`)
+  .then((res) => {
+    console.log(res.data);
+    setPost(res.data);
+  })
+  .catch((err) => {
+    toast.error("Post Does Not Exist!");
     console.log(err);
-})
+  });
 },[])
 
 

@@ -11,7 +11,7 @@ const UserProfile = () => {
   const userr = useState(
     decodeToken(JSON.parse(localStorage.getItem("token"))).user
   );
-  console.log(userr);
+ 
   const [user, setUser] = useState(null);
   const [posts, setPosts] = useState([{}]);
   useEffect(() => {
@@ -20,12 +20,13 @@ const UserProfile = () => {
       .then((res) => {
         console.log(res.data);
         setUser(res.data);
+        console.log(user);
       })
       .catch((err) => {
         console.log(err);
       });
 
-    axios
+   axios
       .get(`${baseUrl}/user-posts/${userr[0]._id}`)
       .then((res) => {
         // console.log(res.data);
@@ -48,10 +49,11 @@ const UserProfile = () => {
           <MDBRow>
             <div className="user-dp">
               <img
-                src={`http://localhost:3300/images/${user._id}.jpg`}
+                src={`${baseUrl}/images/${user._id}.jpg`}
                 alt="dp"
                 className="dp"
                 onClick={handleImageUpdate}
+                style={{cursor:"pointer"}}
               />
               <span className="posts">0</span>
               <img src="images/vertical-lines.png" className="bars" />
@@ -76,8 +78,12 @@ const UserProfile = () => {
             {posts.map((image, index) => (
               <div key={index} className="post-image">
                 <img
+                className="post"
                   src={`http://localhost:3300/images/${image._id}.jpg`}
                   alt={`Post ${index + 1}`}
+                  onClick={()=>{
+                    navigate(`/post/${image._id}`)
+                  }}
                 />
               </div>
             ))}

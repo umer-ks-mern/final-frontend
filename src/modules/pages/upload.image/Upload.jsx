@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from 'axios';
+import './upload.css'
 
 function Upload() {
   const [file, setFile] = useState();
@@ -21,13 +22,23 @@ function Upload() {
 
   return (
     <div className="mt-4">
+     
+      <div className="image-uploader">
+      
       <input
         type="file"
-        accept="image/*" 
+        id="file-input"
+        accept="image/*"
         onChange={(e) => setFile(e.target.files[0])}
-        className="mb-2"
       />
-      <button
+      {selectedFile && (
+        <div className="preview">
+          <img src={URL.createObjectURL(selectedFile)} alt="Preview" />
+        </div>
+      )}
+    </div>
+  
+            <button
         type="button"
         onClick={upload}
         className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-500"
