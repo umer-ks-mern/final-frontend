@@ -1,0 +1,46 @@
+.authbox{
+    margin-top: -137px;
+}
+
+
+.form-control{
+  width: 500px;
+  height: 50px;
+  border-radius: 5px;
+  margin-top: 40px;
+  border-color: rgb(167, 163, 163);
+}
+.brand-logo{
+  margin-top: 70px;
+  width: 250px;
+}
+
+/* ImageUploader.css */
+
+.image-uploader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.custom-file-upload {
+  background-color: #eceff3;
+  color: #0a0a0a;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+#file-input {
+  display: none;
+}
+
+.preview {
+  max-width: 300px;
+  margin-top: 10px;
+}
+
+.preview img {
+  width: 100%;
+}

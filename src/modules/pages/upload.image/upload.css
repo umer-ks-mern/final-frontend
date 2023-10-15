@@ -1,0 +1,30 @@
+/* ImageUploader.css */
+
+.image-uploader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .custom-file-upload {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  #file-input {
+    display: none;
+  }
+  
+  .preview {
+    max-width: 300px;
+    margin-top: 10px;
+  }
+  
+  .preview img {
+    width: 100%;
+  }
+  
